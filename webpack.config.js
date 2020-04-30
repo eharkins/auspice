@@ -5,6 +5,8 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const fs = require('fs');
 const utils = require('./cli/utils');
 
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 /* Webpack config generator */
 
@@ -55,7 +57,13 @@ const generateConfig = ({extensionPath, devMode=false, customOutputPath, analyze
   ] : [
     pluginProcessEnvData,
     new webpack.optimize.AggressiveMergingPlugin(), // merge chunks - https://github.com/webpack/docs/wiki/list-of-plugins#aggressivemergingplugin
-    pluginCompress
+    pluginCompress,
+    new CleanWebpackPlugin(), // remove duplicte hash files (created during changes)
+    /* Cache busting; plugin to automatically insert the script tag of content hashed JS file(auspice.bundle.js) dynamically into HTML files */
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+      template: "./index.html"
+    })
   ];
 
   if (analyzeBundle) {
@@ -88,8 +96,8 @@ const generateConfig = ({extensionPath, devMode=false, customOutputPath, analyze
     entry,
     output: {
       path: outputPath,
-      filename: "auspice.bundle.js",
-      chunkFilename: 'auspice.chunk.[name].bundle.js',
+      filename: "auspice.[hash].bundle.js",
+      chunkFilename: "auspice.[hash].chunk.[name].bundle.js",
       publicPath: "/dist/"
     },
     resolve: {
@@ -100,7 +108,18 @@ const generateConfig = ({extensionPath, devMode=false, customOutputPath, analyze
     },
     plugins,
     optimization: {
-      minimize: !devMode
+      minimize: !devMode,
+      moduleIds: "hashed",
+      runtimeChunk: "single",
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: "vendors",
+            chunks: "all"
+          }
+        }
+      }
     },
     module: {
       rules: [
