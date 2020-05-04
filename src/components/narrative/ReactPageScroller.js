@@ -249,7 +249,6 @@ export default class ReactPageScroller extends React.Component {
                     </div>
                 );
             }
-
             if (!_.isNil(children[number + 1])) {
                 componentsToRender.push(
                     <div key={number + 1}
