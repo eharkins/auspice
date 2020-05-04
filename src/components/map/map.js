@@ -36,6 +36,7 @@ import "../../css/mapbox.css";
     absoluteDateMax: state.controls.absoluteDateMax,
     treeVersion: state.tree.version,
     treeLoaded: state.tree.loaded,
+    treeName: state.tree.name,
     nodes: state.tree.nodes,
     nodeColors: state.tree.nodeColors,
     visibility: state.tree.visibility,
@@ -270,7 +271,8 @@ class Map extends React.Component {
     const geoResolutionChanged = this.props.geoResolution !== nextProps.geoResolution;
     const dataChanged = (!nextProps.treeLoaded || this.props.treeVersion !== nextProps.treeVersion);
     const colorByChanged = (nextProps.colorScaleVersion !== this.props.colorScaleVersion);
-    if (mapIsDrawn && (geoResolutionChanged || dataChanged || colorByChanged)) {
+    const treeNameChanged = (nextProps.treeName !== this.props.treeName);
+    if (mapIsDrawn && (geoResolutionChanged || dataChanged || colorByChanged || treeNameChanged)) {
       this.state.d3DOMNode.selectAll("*").remove();
       this.setState({
         d3elems: null,
