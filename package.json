@@ -36,8 +36,7 @@
     "integration-test:ci": "start-server-and-test server http://localhost:4000 integration-test",
     "smoke-test": "NODE_ENV=test ENV=dev jest ./test/smoke-test/urls.test.js --config puppeteer.config.js",
     "smoke-test:ci": "start-server-and-test server http://localhost:4000 smoke-test",
-    "diff-lang": "./scripts/diff-lang.js",
-    "get-data-new": "node ./scripts/get-data.js"
+    "diff-lang": "./scripts/diff-lang.js"
   },
   "dependencies": {
     "@babel/core": "^7.3.4",
@@ -131,7 +130,6 @@
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "eslint": "^5.14.1",
-    "rimraf": "3.0.2",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-defaults": "^7.0.1",
     "eslint-plugin-filenames": "^0.1.2",
