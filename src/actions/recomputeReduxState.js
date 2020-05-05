@@ -690,7 +690,7 @@ export const createStateFromQueryOrJSONs = ({
     controls["absoluteZoomMax"] = entropy.lengthSequence;
   } else if (oldState) {
     if (changePage) { // Reload Saved State if you can
-      const baseState = window[`allBaseStates.${query.n || 0}`]; 
+      const baseState = window[`allBaseStates.${query.n || 0}`];
       if (baseState) {
         return baseState;
       }
@@ -797,8 +797,9 @@ export const createStateFromQueryOrJSONs = ({
     );
   }
 
-  if (narrativeBlocks) // Save state if it's a created-from-scratch state
+  if (narrativeBlocks) { // Save state if it's a created-from-scratch state
     window[`allBaseStates.${query.n}`] = { tree, treeToo, metadata, entropy, controls, narrative, frequencies, query };
+  }
 
   return {tree, treeToo, metadata, entropy, controls, narrative, frequencies, query};
 };
