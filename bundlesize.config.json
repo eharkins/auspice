@@ -8,5 +8,6 @@
       "path": "./dist/auspice.chunk.*.bundle.js",
       "maxSize": "110 kB"
     }
+    // TODO: this needs to include something for webpack hashes for it to work with that
   ]
 }

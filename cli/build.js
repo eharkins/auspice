@@ -27,6 +27,11 @@ const addParser = (parser) => {
 const run = (args) => {
 
   /* webpack set up */
+  // TODO: in order for extensions to work with #1070, we would
+  // need to get the name of the bundle including the hash from
+  // the output of webpackConfig and inject that into the index.html
+  // Otherwise the e.g. nextstrain.org server will request auspice.bundle.js
+  // instead of auspice.[hash].bundle.js and the request will fail
   const extensionPath = args.extend ? path.resolve(args.extend) : undefined;
   const customOutputPath = utils.customOutputPath(args.extend);
   const webpackConfig = generateWebpackConfig({extensionPath, devMode: false, customOutputPath, analyzeBundle: args.analyzeBundle});
