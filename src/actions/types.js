@@ -52,3 +52,4 @@ export const SET_AVAILABLE = "SET_AVAILABLE";
 export const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR";
 export const TOGGLE_LEGEND = "TOGGLE_LEGEND";
 export const CACHE_JSONS = "CACHE_JSONS";
+export const CLEAR_JSON_CACHE = "CLEAR_JSON_CACHE";

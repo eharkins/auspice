@@ -271,10 +271,6 @@ class Map extends React.Component {
     const geoResolutionChanged = this.props.geoResolution !== nextProps.geoResolution;
     const dataChanged = (!nextProps.treeLoaded || this.props.treeVersion !== nextProps.treeVersion);
     const colorByChanged = (nextProps.colorScaleVersion !== this.props.colorScaleVersion);
-    // TODO:1071 what is the best way to update this and other components when changing datasets / trees in narrative mode 
-    // with respect to re-rendering?
-    // const treeNameChanged = (nextProps.treeName !== this.props.treeName);
-    // if (mapIsDrawn && (geoResolutionChanged || dataChanged || colorByChanged || treeNameChanged)) {
     if (mapIsDrawn && (geoResolutionChanged || dataChanged || colorByChanged)) {
       this.state.d3DOMNode.selectAll("*").remove();
       this.setState({
